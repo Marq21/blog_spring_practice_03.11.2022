@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Блог сайта</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container mt-8 pt-5">
+    <div th:each="el : ${post}" class="alert alert-info mt-2">
+        <h3 th:text="${el.title}"></h3>
+        <p th:text="${el.fullText}"></p>
+        <strong>Просмотры:</strong><span th:text="${el.views}"></span><br>
+        <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning">edit</a><br><br>
+        <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
+            <button class="btn btn-warning" type="submit">delete</button>
+        </form>
+
+    </div>
+</div>
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
